@@ -1,14 +1,12 @@
-# mail@dongguochao.com
-
-version: '2.2'
+version: '3.1'
 
 services:
   delos:
     container_name: rap2-delos
     # build from ./Dockerfile
-#    build: .
+    build: .
     # build from images
-    image: blackdog1987/rap2-delos:1.0.0
+    image: rap2-delos:latest
     environment:
       # if you have your own mysql, config it here, and disable the 'mysql' config blow
       - MYSQL_URL=rap2-mysql # links will maintain /etc/hosts, just use 'container_name'
@@ -29,9 +27,9 @@ services:
     ###### RUN ONLY ONCE THEN REMOVE 'sleep 30 && node scripts/init'
     command: /bin/sh -c 'sleep 30; node scripts/init; node dispatch.js'
     # init the databases
-#    command: sleep 30 && node scripts/init && node dispatch.js
+    # command: sleep 30 && node scripts/init && node dispatch.js
     # without init
-#    command: node dispatch.js
+    # command: node dispatch.js
     links:
       - redis
       - mysql
